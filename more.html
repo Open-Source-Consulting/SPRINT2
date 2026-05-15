@@ -98,3 +98,68 @@
                     <span class="material-symbols-outlined">flash_on</span>
                 </button>
             </div>
+            <div class="header-group">
+                <button class="status-badge" aria-label="HDR settings">
+                    <span class="badge-text-hdr">HDR</span>
+                </button>
+                <button class="status-badge" aria-label="Resolution and framerate">
+                    <div class="badge-resolution">
+                        <span class="res-main">4K</span>
+                        <span class="res-sub">60</span>
+                    </div>
+                </button>
+            </div>
+        </header>
+
+        <!-- Seletor de modo -->
+        <nav class="mode-picker" aria-label="Camera Modes">
+            <div class="mode-list">
+                <button class="mode-item" onclick="location.href='index.html'">Night</button>
+                <button class="mode-item" onclick="location.href='index.html'">Portrait</button>
+                <button class="mode-item" onclick="location.href='index.html'">Photo</button>
+                <button class="mode-item" onclick="location.href='index.html'">Video</button>
+                <button class="mode-item active">Mais</button>
+            </div>
+        </nav>
+
+        <!-- Navegação inferior -->
+        <footer>
+            <!-- Galeria -->
+            <button class="gallery-btn" aria-label="Open Gallery">
+                <img alt="Recent photo preview" class="gallery-img"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkpC9d-YwgJ0lAejhlXgTthoc5QEyDi7DZEB_LI-Qfm7uFvT3vTQYQ7cHrRtKvHgORJ71IUYKLa_wbG6GUmYjIvMKNzUepeg_VbrX6fgmTd9Zo6Y_1JCKGMl97BWnW544jIJsKUl18xlO7AfIS_1hSfkveuhnlGuXoSWEjFDKQQChlsVQeMM5-J8JFfNWC0dYpw1MMf7IBYTbHvZOSjW0GHyRav25Zwxkp10ZXLD-zPpXGV2AKqL4Yyqzr_m6TqBAGfJzaKOQGfmM4">
+            </button>
+
+            <!-- Shutter -->
+            <div class="shutter-container" style="opacity: 0; pointer-events: none;">
+                <div class="shutter-glow" aria-hidden="true"></div>
+                <button class="shutter-btn" aria-label="Take photo">
+                    <div class="shutter-inner">
+                        <div class="shutter-core"></div>
+                    </div>
+                </button>
+            </div>
+
+            <!-- Câmera Flip e IA -->
+            <div class="flip-wrapper">
+                <button class="flip-btn" aria-label="Switch camera">
+                    <span class="material-symbols-outlined">flip_camera_ios</span>
+                </button>
+                <button class="ai-btn" aria-label="AI Mode">AI</button>
+            </div>
+        </footer>
+
+
+    </main>
+
+    <script src="src/js/script.js"></script>
+    <script>
+        // Certifique-se de que “Mais” fique centralizado ao carregar a página
+        document.addEventListener('DOMContentLoaded', () => {
+            const activeMode = document.querySelector('.mode-item.active');
+            if (activeMode) activeMode.scrollIntoView({ inline: 'center' });
+        });
+    </script>
+</body>
+
+</html>
