@@ -255,4 +255,4 @@ O layout é controlado pela classe `.app-container` com `aspect-ratio: 1260 / 28
 
 ---
 
-> **Projeto desenvolvido como parte de um sprint de front-end.**
+> **Projeto desenvolvido como parte de um sprint de front-end e web development.**
