@@ -1,0 +1,95 @@
+:root {
+    --primary: #8ff5ff;
+    --primary-container: #00eefc;
+    --background: #0e0e0e;
+    --surface-lowest: #000000;
+    --surface-container: #191919;
+    --on-surface: #ffffff;
+    --on-surface-variant: #ababab;
+    --outline-variant: rgba(72, 72, 72, 0.3);
+    --zinc-900: #18181b;
+    --white-5: rgba(255, 255, 255, 0.05);
+    --white-10: rgba(255, 255, 255, 0.1);
+    --white-20: rgba(255, 255, 255, 0.2);
+
+    --font-headline: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #1a1a1a;
+    color: var(--on-surface);
+    font-family: var(--font-body);
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.app-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    width: 100dvw;
+    height: 100vh;
+    height: 100dvh;
+}
+
+.app-container {
+    position: relative;
+    aspect-ratio: 1260 / 2800;
+    height: 100%;
+    max-height: 100dvh;
+    max-width: 100dvw;
+    overflow: hidden;
+    background-color: var(--surface-lowest);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+}
+
+@media (max-aspect-ratio: 1260/2800) {
+    .app-container {
+        height: auto;
+        width: 100%;
+        box-shadow: none;
+    }
+}
+
+/* Viewfinder */
+.viewfinder-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    background-color: var(--surface-lowest);
+}
+
+.camera-view {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease-in-out;
+}
+
+.scanline {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 50%, rgba(143, 245, 255, 0.05) 50%);
+    background-size: 100% 4px;
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.viewfinder-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0) 80%, rgba(0, 0, 0, 0.6) 100%);
+    pointer-events: none;
+}
