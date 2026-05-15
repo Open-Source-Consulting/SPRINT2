@@ -87,3 +87,114 @@ document.addEventListener('DOMContentLoaded', () => {
     if (activeMode) {
         activeMode.scrollIntoView({ inline: 'center' });
     }
+
+    // Animação simples do botão de captura
+    if (shutterBtn) {
+        shutterBtn.addEventListener('click', () => {
+            // Efeito de flash
+            const flash = document.createElement('div');
+            flash.style.position = 'absolute';
+            flash.style.inset = '0';
+            flash.style.backgroundColor = 'white';
+            flash.style.zIndex = '100';
+            flash.style.opacity = '0';
+            flash.style.transition = 'opacity 0.1s ease-out';
+
+            app.appendChild(flash);
+
+            requestAnimationFrame(() => {
+                flash.style.opacity = '0.8';
+                setTimeout(() => {
+                    flash.style.opacity = '0';
+                    setTimeout(() => flash.remove(), 100);
+                }, 50);
+            });
+        });
+    }
+
+    // ========================
+    // Overlay do Chat IA
+    // ========================
+    const aiBtn = document.querySelector('.ai-btn');
+    const aiOverlay = document.getElementById('ai-overlay');
+    const aiCloseBtn = document.getElementById('ai-close');
+    const aiInput = document.getElementById('ai-input');
+    const aiSendBtn = document.getElementById('ai-send');
+    const aiMessages = document.getElementById('ai-messages');
+
+    // Respostas simuladas do bot
+    const botResponses = [
+        'Posso ajudar a melhorar a iluminação da sua foto!',
+        'Tente usar o modo retrato para fotos com fundo desfocado.',
+        'O modo noite funciona melhor com o celular estabilizado.',
+        'Use o HDR para capturar mais detalhes nas sombras.',
+        'Quer que eu sugira o melhor modo para esta cena?',
+        'A resolução 4K é ideal para fotos com muitos detalhes.',
+        'Para panoramas, mova o celular lentamente da esquerda para a direita.',
+        'O modo Astro precisa de pelo menos 15 segundos de exposição.',
+    ];
+
+    function openAiOverlay() {
+        if (aiOverlay) {
+            aiOverlay.classList.add('ai-overlay-visible');
+        }
+    }
+
+    function closeAiOverlay() {
+        if (aiOverlay) {
+            aiOverlay.classList.remove('ai-overlay-visible');
+        }
+    }
+
+    function addMessage(text, isUser) {
+        if (!aiMessages) return;
+
+        const msg = document.createElement('div');
+        msg.className = `ai-msg ${isUser ? 'ai-msg-user' : 'ai-msg-bot'}`;
+        msg.innerHTML = `
+            <div class="ai-avatar">${isUser ? 'EU' : 'AI'}</div>
+            <div class="ai-bubble">${text}</div>
+        `;
+        aiMessages.appendChild(msg);
+        aiMessages.scrollTop = aiMessages.scrollHeight;
+    }
+
+    function sendMessage() {
+        if (!aiInput) return;
+
+        const text = aiInput.value.trim();
+        if (!text) return;
+
+        // Adiciona mensagem do usuário
+        addMessage(text, true);
+        aiInput.value = '';
+
+        // Simula resposta do bot após um atraso
+        setTimeout(() => {
+            const randomResponse = botResponses[Math.floor(Math.random() * botResponses.length)];
+            addMessage(randomResponse, false);
+        }, 800 + Math.random() * 700);
+    }
+
+    // Listeners de eventos do chat IA
+    if (aiBtn) {
+        aiBtn.addEventListener('click', openAiOverlay);
+    }
+
+    if (aiCloseBtn) {
+        aiCloseBtn.addEventListener('click', closeAiOverlay);
+    }
+
+    if (aiSendBtn) {
+        aiSendBtn.addEventListener('click', sendMessage);
+    }
+
+    if (aiInput) {
+        aiInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+    }
+});
